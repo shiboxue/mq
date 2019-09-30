@@ -27,8 +27,12 @@ import java.util.concurrent.Future;
 public class UserRestController {
 
     private final static Logger log = LoggerFactory.getLogger(UserRestController.class);
+
+    //本地用户服务注入
     @Autowired
     private IUserService userService;
+
+    //异步任务bean注入
     @Autowired
     private AsyncTask asyncTask;
 
@@ -39,12 +43,23 @@ public class UserRestController {
         return msg;
     }
 
+    /**
+     * @name mvc跳转测试，方式@RequestMapping
+     * @param msg
+     * @return
+     */
     @RequestMapping("/test3")
     public String test3(String msg){
-        System.out.println("");
         return "b";
     }
 
+    /**
+     * @name 传参测试 @PostMapping
+     * @param user
+     * @return
+     * @des form-data 方式可以提交
+     * @des2 Content-Type 为 application/json 也可以
+     */
     @PostMapping(path = "/test4")
     public String test4(User user){
         String msg = "";
@@ -52,11 +67,22 @@ public class UserRestController {
         return msg;
     }
 
+    /**
+     * @name 上传get方式
+     * @return
+     * @des   注意：Content-Type为：multipart/form-data
+     */
     @GetMapping("/upload")
     public String upload() {
         return "upload";
     }
 
+    /**
+     * @name 上传测试post方式
+     * @param file
+     * @return
+     * @des MultipartFile
+     */
     @PostMapping("/upload")
     public String upload(@RequestParam("file") MultipartFile file) {
         if (file.isEmpty()) {
@@ -66,7 +92,7 @@ public class UserRestController {
         String filePath = "d:/";
         File dest = new File(filePath + fileName);
         try {
-            file.transferTo(dest);
+            file.transferTo(dest);//上传方法
             log.info("上传成功");
             return "上传成功";
         } catch (IOException e) {
@@ -75,6 +101,11 @@ public class UserRestController {
         return "上传失败！";
     }
 
+    /**
+     * @name 测试异步任务方法
+     * @param request request对象
+     * @return
+     */
     @GetMapping(path = "/test5")
     public String test5(HttpServletRequest request){
         String msg = request.getParameter("msg");
@@ -106,6 +137,12 @@ public class UserRestController {
         int i = 10 / num;
         return "result:" + i;
     }
+
+    /**
+     * @name freemarker 简单的跳转ftl页
+     * @param modelMap 处理工具：ModelMap对象主要用于传递控制方法处理数据到结果页面
+     * @return
+     */
     @RequestMapping("/test7")
     public String testFreemarker(ModelMap modelMap){
         modelMap.addAttribute("msg", "Hello dalaoyang , this is freemarker");

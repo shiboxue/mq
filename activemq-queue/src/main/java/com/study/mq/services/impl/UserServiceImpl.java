@@ -9,10 +9,10 @@ import javax.jws.WebService;
 import java.util.List;
 
 /**
- * @classNameUserServiceImpl
+ * @className UserServiceImpl
  * @Description TODO
- * @Auhtorshiboxue
- * @Date2019/9/129:29
+ * @Auhtor shiboxue
+ * @Date 2019/9/12 9:29
  * @Version 1.0
  **/
 @WebService(targetNamespace="http://services.mq.study.com/",endpointInterface="com.study.mq.services.IUserService")

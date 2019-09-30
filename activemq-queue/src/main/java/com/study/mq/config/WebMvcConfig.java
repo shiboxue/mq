@@ -14,12 +14,15 @@ import org.springframework.web.servlet.view.JstlView;
  * 标题: 自定义配置类<br>
  * 描述: 注册自定义的拦截器<br>
  *
- * @author zc
- * @date 2018/04/26
+ * @author shiboxue
+ * @date 2019/09/30
  */
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
-
+    /**
+     * @name SpringMVC 跳转jsp 配置
+     * @return viewResolver 视图解析器
+     */
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -29,6 +32,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         return viewResolver;
     }
 
+    /**
+     * @name 添加拦截器，并设置拦截访问路径
+     * @param registry
+     */
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         /**
@@ -39,6 +46,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         super.addInterceptors(registry);
     }
 
+    /**
+     * @name Swagger访问地址配置
+     * @param registry
+     */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
                 .addResourceLocations("classpath:/META-INF/resources/");
