@@ -1,6 +1,7 @@
 package com.study.mq.ScheduledTask;
 
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +20,18 @@ import java.util.Date;
 public class TestTask {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
+    @Value("${scheduled.enable}")//定时任务开关
+    private String scheduledEnable;
     /**
      * 定义每过3秒执行任务
      * 支持使用 @Scheduled(cron = "4-40 * * * * ?") cron表达式
      */
     @Scheduled(fixedRate = 3000)
     public void reportCurrentTime() {
+        if(!Boolean.parseBoolean(scheduledEnable)){
+            System.out.println("定时任务已关闭");
+            return;
+        }
         System.out.println("现在时间：" + dateFormat.format(new Date()));
     }
 

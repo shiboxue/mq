@@ -93,7 +93,7 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>2.6.1</version>
         </dependency>
-        <!--JAX-WS实现WebServices-->
+      <!--  &lt;!&ndash;JAX-WS实现WebServices&ndash;&gt;
         <dependency>
             <groupId>com.sun.xml.ws</groupId>
             <artifactId>policy</artifactId>
@@ -113,7 +113,7 @@
             <groupId>org.glassfish.ha</groupId>
             <artifactId>ha-api</artifactId>
             <version>3.1.9</version>
-        </dependency>
+        </dependency>-->
 
 
     </dependencies>

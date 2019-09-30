@@ -17,8 +17,10 @@ public class PriverController {
     private JmsMessagingTemplate jmsMessagingTemplate;
 
     @RequestMapping("/test")
+    @ResponseBody
     public String test1(String msg){
         jmsMessagingTemplate.convertAndSend("queue",msg);
-        return "消息已经发送";
+        log.info("消息已经发送");
+        return "b";
     }
 }
