@@ -11,6 +11,7 @@ import java.util.concurrent.Future;
  * 标题: 自定义异步执行任务<br>
  * 描述: 异步方法需使用 @Async 注解<br>
  * 判断任务是否完成，必须返回 Future 接口
+ * 注意：spring管理的异步线程数量有限，如果是web项目的话，线程数量由tomcat的线程池配置有关系
  * @author zc
  * @date 2018/04/26
  */

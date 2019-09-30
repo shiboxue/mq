@@ -1,6 +1,7 @@
 package com.study.mq;
 
 import com.study.mq.dao.UserMapper;
+import com.study.mq.services.IThreadTestService;
 import com.study.mq.services.IUserService;
 import com.study.mq.vo.User;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
@@ -19,6 +20,9 @@ import java.util.List;
 public class MqApplicationTests {
     @Resource
     private UserMapper UserMapper;
+
+    @Resource
+    private IThreadTestService threadTestService;
 
     /**
      * 测试mybatis查询结果
@@ -45,5 +49,13 @@ public class MqApplicationTests {
         List<User> userResult= userService.selectAll();
         System.out.println("userResult:"+userResult);
     }
+
+    @Test
+    public void threadTest() {
+        for (int i = 0; i < 5000; i++) {
+            threadTestService.test(i);
+        }
+    }
+
 
 }
