@@ -32,6 +32,7 @@ import javax.xml.ws.Endpoint;
     public Endpoint endpoint() {
         EndpointImpl endpoint=new EndpointImpl(bus, userService);//绑定要发布的服务
         endpoint.publish("/user"); //显示要发布的名称
+        System.out.println();
         return endpoint;
     }
 }
