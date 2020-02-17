@@ -12,12 +12,20 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static com.study.pachong.SpiderKugou.getTitle;
 
 @RunWith(SpringRunner.class)//就是一个运行器，junit4进行测试
 @SpringBootTest//核心测试注解
 @MapperScan(basePackages = "com.study.mq.dao")
 public class MqApplicationTests {
+    public static String LINK = "https://www.kugou.com/yy/rank/home/PAGE-8888.html?from=rank";//酷狗分页目录
+    public static List<Map<String,String>> musicUrlList = new ArrayList<>();//测试存放类
+
     @Resource
     private UserMapper UserMapper;
 
@@ -55,6 +63,21 @@ public class MqApplicationTests {
         for (int i = 0; i < 5000; i++) {
             threadTestService.test(i);
         }
+    }
+
+    @Test
+    public void kugouTest() throws IOException {
+        for(int i = 1 ; i < 23; i++){
+            String url = LINK.replace("PAGE", i + "");
+            getTitle(url);
+        }
+//        FileDownload down = new FileDownload();
+//
+//        for (int i = 0; i <musicUrlList.size() ; i++) {
+//            Map<String, String> map = musicUrlList.get(i);
+//            System.out.println(map.get("musicName"));
+//            down.download(map.get("playUrl"), map.get("musicName"));
+//        }
     }
 
 
